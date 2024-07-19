@@ -1,8 +1,0 @@
-Metadata-Version: 2.1
-Name: mlproject
-Version: 0.0.1
-Author: sreedeep.
-Author-email: sreedeepek.95@gmail.com
-Requires-Dist: pandas
-Requires-Dist: numpy
-Requires-Dist: seaborn
