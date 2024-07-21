@@ -9,7 +9,7 @@ from sklearn.impute import SimpleImputer
 from src.logger import logging
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OrdinalEncoder, StandardScaler, OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler
 
 @dataclass
 class DataTransformationConfig:
@@ -32,7 +32,7 @@ class DataTransformation:
                 'Torque [Nm]',
                 'Tool wear [min]'
             ]
-
+            
             num_pipeline = Pipeline(steps=[
                 ("imputer", SimpleImputer(strategy="median")),
                 ("scaler", StandardScaler())
@@ -90,4 +90,3 @@ class DataTransformation:
             return train_arr, test_arr
         except Exception as e:
             raise CustomException(e, sys)
-

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance Web App</title>
+    <style>
+        body {
+            background-color: #121212; /* Dark background for the entire page */
+            color: #e0e0e0; /* Light grey text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1e1e1e; /* Slightly lighter dark grey for the form */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+        }
+        h1 {
+            color: #ffffff; /* White text color for the header */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #e0e0e0; /* Light grey text color for labels */
+            font-size: 14px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%; /* Full width for input fields */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #333; /* Dark grey border for input fields */
+            border-radius: 5px;
+            background-color: #2a2a2a; /* Dark grey background for input fields */
+            color: #e0e0e0; /* Light grey text color for input fields */
+            font-size: 14px;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap; /* Ensure fields wrap if necessary */
+            margin-bottom: 15px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 48%; /* Minimum width for each input field */
+            margin-right: 4%; /* Space between fields */
+        }
+        .form-group:last-child {
+            margin-right: 0;
+        }
+        input[type="submit"] {
+            background-color: #6200ea; /* Purple background for the submit button */
+            color: #ffffff; /* White text color for the submit button */
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="submit"]:hover {
+            background-color: #3700b3; /* Darker purple on hover */
+        }
+        .prediction {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .prediction span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predictive Maintenance Web App</h1>
+        <form action="/predict" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="air_temperature">Air Temperature [K]:</label>
+                    <input type="number" id="air_temperature" name="air_temperature" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="process_temperature">Process Temperature [K]:</label>
+                    <input type="number" id="process_temperature" name="process_temperature" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="rotational_speed">Rotational Speed [rpm]:</label>
+                    <input type="number" id="rotational_speed" name="rotational_speed" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="torque">Torque [Nm]:</label>
+                    <input type="number" id="torque" name="torque" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tool_wear">Tool Wear [min]:</label>
+                    <input type="number" id="tool_wear" name="tool_wear" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="selected_type">Type:</label>
+                    <select id="selected_type" name="selected_type">
+                        <option value="L">Low</option>
+                        <option value="M">Medium</option>
+                        <option value="H">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Predict">
+        </form>
+        <div class="prediction">
+            {% if prediction_text %}
+                {{ prediction_text | safe }}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
