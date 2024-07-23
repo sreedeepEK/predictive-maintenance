@@ -6,7 +6,6 @@ app = Flask(__name__)
 # Initialize the prediction pipeline
 pipeline = PredictPipeline()
 
-
 # Home route
 @app.route('/')
 def home():
